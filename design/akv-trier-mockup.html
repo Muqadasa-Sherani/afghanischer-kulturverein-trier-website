@@ -1,0 +1,497 @@
+<title>Kulturverein Trier Entwurf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@500;700&family=Noto+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* ---------- Stone palettes (raw values) ---------- */
+:root, :root[data-palette="lapis"] {
+  --a:#1F4E9A; --a-dk:#86A8E8;   /* lapis lazuli, Badakhshan */
+  --b:#A9832A; --b-dk:#D9B75E;   /* pyrite gold flecks */
+  --g:#F3F4F1; --g-dk:#0F131D;
+  --s:#FFFFFF; --s-dk:#171C29;
+  --i:#141B2E; --i-dk:#E7E9F0;
+  --m:#596074; --m-dk:#9CA3B6;
+  --l:#D9DCE3; --l-dk:#2A3144;
+  --band:#1A3F7E;
+}
+:root[data-palette="firuza"] {
+  --a:#0F7479; --a-dk:#5FC7CA;   /* firuza / turquoise */
+  --b:#1D3B6E; --b-dk:#94B3EC;   /* cobalt of Herat tilework */
+  --g:#F1F5F4; --g-dk:#0D1616;
+  --s:#FFFFFF; --s-dk:#132020;
+  --i:#12242A; --i-dk:#E3EEEE;
+  --m:#52666A; --m-dk:#93A9AB;
+  --l:#D4DFDE; --l-dk:#233535;
+  --band:#0D5F63;
+}
+:root[data-palette="jade"] {
+  --a:#56622C; --a-dk:#B5C27C;   /* sang-e yashm, Afghan jade */
+  --b:#0F7479; --b-dk:#5FC7CA;   /* turquoise accent */
+  --g:#F4F4EE; --g-dk:#12130D;
+  --s:#FFFFFC; --s-dk:#1A1C13;
+  --i:#1E2114; --i-dk:#ECEDE3;
+  --m:#60644D; --m-dk:#A4A892;
+  --l:#DEDFD1; --l-dk:#2E3123;
+  --band:#4A5424;
+}
+
+/* ---------- Theme tokens ---------- */
+:root {
+  --accent:var(--a); --accent2:var(--b);
+  --bg:var(--g); --surface:var(--s); --text:var(--i); --muted:var(--m); --line:var(--l);
+  --on-band:#FFFFFF;
+  --tool-bg:#1B1D22; --tool-text:#E9EAEE; --tool-muted:#A2A6B1;
+  --f-display:"Gloock", Georgia, "Times New Roman", serif;
+  --f-body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-display-rtl:"Noto Naskh Arabic", "Geeza Pro", "Times New Roman", serif;
+  --f-body-rtl:"Noto Sans Arabic", "Geeza Pro", Tahoma, sans-serif;
+  --radius:6px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme:dark;
+    --accent:var(--a-dk); --accent2:var(--b-dk);
+    --bg:var(--g-dk); --surface:var(--s-dk); --text:var(--i-dk); --muted:var(--m-dk); --line:var(--l-dk);
+    --tool-bg:#000000;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme:dark;
+  --accent:var(--a-dk); --accent2:var(--b-dk);
+  --bg:var(--g-dk); --surface:var(--s-dk); --text:var(--i-dk); --muted:var(--m-dk); --line:var(--l-dk);
+  --tool-bg:#000000;
+}
+
+/* ---------- Base ---------- */
+body { background:var(--bg); color:var(--text); font:16px/1.6 var(--f-body); }
+.site[dir="rtl"] { font-family:var(--f-body-rtl); }
+.wrap { max-width:1120px; margin-inline:auto; padding-inline:20px; }
+h1,h2,h3 { font-family:var(--f-display); font-weight:400; line-height:1.15; text-wrap:balance; margin:0; }
+.site[dir="rtl"] h1, .site[dir="rtl"] h2, .site[dir="rtl"] h3 { font-family:var(--f-display-rtl); font-weight:700; line-height:1.5; }
+p { margin:0; }
+a { color:inherit; }
+:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:3px; }
+
+/* ---------- Mockup toolbar (not part of the site) ---------- */
+.tool { background:var(--tool-bg); color:var(--tool-text); font:13px/1.4 var(--f-body); }
+.tool .wrap { display:flex; flex-wrap:wrap; gap:10px 24px; align-items:center; padding-block:10px; }
+.tool-tag { font-weight:600; letter-spacing:.06em; text-transform:uppercase; font-size:11px; color:var(--tool-muted); }
+.tool-group { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.tool-label { color:var(--tool-muted); margin-inline-end:4px; }
+.chip { display:inline-flex; align-items:center; gap:7px; background:transparent; color:var(--tool-text); border:1px solid #3A3D46; border-radius:999px; padding:5px 11px; font:inherit; cursor:pointer; }
+.chip[aria-pressed="true"] { background:#F0F1F4; color:#15171C; border-color:#F0F1F4; }
+.sw { width:12px; height:12px; border-radius:50%; display:inline-block; box-shadow:inset 0 0 0 1px rgba(255,255,255,.25); }
+.tool-note { flex-basis:100%; color:#F2C66D; }
+
+/* ---------- Header ---------- */
+.head { border-bottom:1px solid var(--line); background:var(--surface); }
+.head .wrap { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px 28px; padding-block:16px; }
+.brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
+.logo { width:48px; height:48px; flex:none; border-radius:50%; border:1.5px dashed var(--accent); display:grid; place-items:center; color:var(--accent); }
+.brand-name { font-family:var(--f-display); font-size:19px; line-height:1.15; }
+.brand-name small { display:block; font-family:var(--f-body); font-size:12px; color:var(--muted); letter-spacing:.04em; }
+.site[dir="rtl"] .brand-name { font-family:var(--f-body); font-weight:600; font-size:17px; }
+nav ul { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:4px 22px; font-weight:500; font-size:15px; }
+nav a { text-decoration:none; padding-block:4px; border-bottom:2px solid transparent; }
+nav a:hover, nav a[aria-current="page"] { border-bottom-color:var(--accent); }
+nav a.join { color:var(--accent); }
+
+/* ---------- Hero ---------- */
+.hero .wrap { display:grid; grid-template-columns:1.05fr 1fr; gap:48px; align-items:center; padding-block:56px 48px; }
+.kicker { font-size:13px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
+.site[dir="rtl"] .kicker { letter-spacing:0; text-transform:none; font-size:14px; }
+.hero h1 { font-size:clamp(38px, 5.4vw, 64px); margin-block:14px 18px; }
+.hero p.lead { font-size:18px; color:var(--muted); max-width:34em; }
+.btns { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+.btn { display:inline-block; text-decoration:none; font-weight:600; font-size:15px; padding:11px 20px; border-radius:var(--radius); border:1.5px solid var(--accent); }
+.btn.solid { background:var(--accent); color:var(--surface); }
+.btn.ghost { color:var(--accent); }
+.band .btn.solid { background:var(--on-band); color:var(--band); border-color:var(--on-band); }
+.band .btn.ghost { color:var(--on-band); border-color:rgba(255,255,255,.6); }
+
+/* Photo placeholders with girih pattern */
+.ph { position:relative; overflow:hidden; border-radius:var(--radius); background:color-mix(in srgb, var(--accent) 10%, var(--surface)); max-width:100%; }
+.ph svg.pat { position:absolute; inset:0; width:100%; height:100%; }
+.ph figcaption { position:absolute; inset-inline-start:12px; bottom:12px; background:var(--surface); color:var(--muted); font-size:12px; padding:4px 9px; border-radius:4px; }
+.hero .ph { aspect-ratio:5/4; }
+.star-line { stroke:var(--accent); opacity:.35; fill:none; stroke-width:1; }
+.star-line-band { stroke:#FFFFFF; opacity:.18; fill:none; stroke-width:1; }
+
+/* Girih border strip */
+.strip { height:28px; display:block; width:100%; }
+
+/* ---------- Sections ---------- */
+section.block { padding-block:56px; }
+.sec-head { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 20px; margin-bottom:28px; }
+.sec-head h2 { font-size:clamp(28px, 3.4vw, 38px); }
+.more { font-weight:600; font-size:15px; color:var(--accent); text-decoration:none; }
+.more:hover { text-decoration:underline; }
+
+.posts { display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; }
+.post { display:flex; flex-direction:column; gap:12px; }
+.post .ph { aspect-ratio:4/3; }
+.meta { display:flex; flex-wrap:wrap; gap:4px 10px; font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.badge { font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--accent2); border:1px solid currentColor; border-radius:3px; padding:0 6px; }
+.site[dir="rtl"] .badge { letter-spacing:0; }
+.post h3 { font-size:23px; }
+.post h3 a { text-decoration:none; }
+.post h3 a:hover { text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px; }
+.post p { color:var(--muted); }
+
+.events-bg { background:var(--surface); border-block:1px solid var(--line); }
+.events { list-style:none; margin:0; padding:0; display:grid; }
+.event { display:grid; grid-template-columns:88px 1fr auto; gap:20px; align-items:center; padding-block:20px; border-top:1px solid var(--line); }
+.event:last-child { border-bottom:1px solid var(--line); }
+.date { text-align:center; font-variant-numeric:tabular-nums; }
+.date .d { display:block; font-family:var(--f-display); font-size:40px; line-height:1; color:var(--accent); }
+.date .mo { display:block; font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; margin-top:4px; }
+.site[dir="rtl"] .date .d { font-family:var(--f-body-rtl); font-weight:600; font-size:34px; }
+.site[dir="rtl"] .date .mo { letter-spacing:0; }
+.event h3 { font-size:22px; margin-bottom:4px; }
+.event .solar { font-size:13px; color:var(--accent2); font-weight:500; }
+.event .where { font-size:14px; color:var(--muted); }
+.event .btn { padding:8px 14px; font-size:14px; }
+
+/* Membership band */
+.band { position:relative; background:var(--band); color:var(--on-band); overflow:hidden; }
+.band svg.pat { position:absolute; inset:0; width:100%; height:100%; }
+.band .wrap { position:relative; display:grid; grid-template-columns:1.3fr 1fr; gap:32px; align-items:center; padding-block:56px; }
+.band h2 { font-size:clamp(28px, 3.6vw, 42px); margin-bottom:12px; }
+.band p { opacity:.88; max-width:36em; }
+.band .btns { margin-top:0; justify-content:flex-end; }
+
+/* Footer */
+footer { padding-block:44px 32px; font-size:14px; color:var(--muted); }
+.foot { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:28px; }
+.foot h4 { margin:0 0 8px; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--text); }
+.site[dir="rtl"] .foot h4 { letter-spacing:0; }
+.foot ul { list-style:none; margin:0; padding:0; display:grid; gap:4px; }
+.foot a { text-decoration:none; }
+.foot a:hover { color:var(--accent); text-decoration:underline; }
+.mono { font-variant-numeric:tabular-nums; word-break:break-all; }
+.legal { margin-top:32px; padding-top:18px; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 20px; font-size:13px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .hero .wrap, .band .wrap { grid-template-columns:1fr; gap:28px; }
+  .band .btns { justify-content:flex-start; }
+  .posts { grid-template-columns:1fr 1fr; }
+  .foot { grid-template-columns:1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .wrap { padding-inline:16px; }
+  .posts, .foot { grid-template-columns:1fr; }
+  .event { grid-template-columns:64px 1fr; }
+  .event .btn { grid-column:2; justify-self:start; }
+  .date .d { font-size:32px; }
+  .hero .wrap { padding-block:36px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn, .chip, nav a { transition:background-color .15s, color .15s, border-color .15s; }
+}
+</style>
+
+<!-- Shared girih (eight-point star) patterns -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="girih" width="56" height="56" patternUnits="userSpaceOnUse">
+      <g class="star-line">
+        <rect x="16" y="16" width="24" height="24"/>
+        <rect x="16" y="16" width="24" height="24" transform="rotate(45 28 28)"/>
+        <path d="M0 28H6M50 28H56M28 0V6M28 50V56"/>
+      </g>
+    </pattern>
+    <pattern id="girih-band" width="72" height="72" patternUnits="userSpaceOnUse">
+      <g class="star-line-band">
+        <rect x="20" y="20" width="32" height="32"/>
+        <rect x="20" y="20" width="32" height="32" transform="rotate(45 36 36)"/>
+        <path d="M0 36H8M64 36H72M36 0V8M36 64V72"/>
+      </g>
+    </pattern>
+  </defs>
+</svg>
+
+<div class="tool" role="region" aria-label="Mockup controls">
+  <div class="wrap">
+    <span class="tool-tag">Draft · placeholder content</span>
+    <div class="tool-group" role="group" aria-label="Stone palette">
+      <span class="tool-label">Stone palette</span>
+      <button class="chip" id="pal-lapis" data-pal="lapis"><span class="sw" style="background:#1F4E9A"></span><span class="sw" style="background:#A9832A"></span>Lapis</button>
+      <button class="chip" id="pal-firuza" data-pal="firuza"><span class="sw" style="background:#0F7479"></span><span class="sw" style="background:#1D3B6E"></span>Firuza (turquoise)</button>
+      <button class="chip" id="pal-jade" data-pal="jade"><span class="sw" style="background:#56622C"></span><span class="sw" style="background:#0F7479"></span>Afghan jade (olive)</button>
+    </div>
+    <div class="tool-group" role="group" aria-label="Language">
+      <span class="tool-label">Language</span>
+      <button class="chip" id="lang-de" data-lang="de">Deutsch</button>
+      <button class="chip" id="lang-en" data-lang="en">English</button>
+      <button class="chip" id="lang-fa" data-lang="fa">دری</button>
+      <button class="chip" id="lang-ps" data-lang="ps">پښتو</button>
+    </div>
+    <span class="tool-note" id="rtl-note" hidden>Dari and Pashto text here is a rough placeholder. A native speaker from the Verein needs to check it before launch.</span>
+  </div>
+</div>
+
+<div class="site" id="site" lang="de" dir="ltr">
+  <header class="head">
+    <div class="wrap">
+      <a class="brand" href="#top" id="top">
+        <span class="logo" aria-label="Logo placeholder">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="6" y="6" width="14" height="14"/><rect x="6" y="6" width="14" height="14" transform="rotate(45 13 13)"/></svg>
+        </span>
+        <span class="brand-name"><span data-t="brand">Afghanischer Kulturverein</span><small data-t="city">Trier</small></span>
+      </a>
+      <nav aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="#top" aria-current="page" data-t="nav_home"></a></li>
+          <li><a href="#posts" data-t="nav_news"></a></li>
+          <li><a href="#events" data-t="nav_events"></a></li>
+          <li><a href="#about" data-t="nav_about"></a></li>
+          <li><a href="#contact" data-t="nav_contact"></a></li>
+          <li><a href="#join" class="join" data-t="nav_member"></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="about">
+    <div class="wrap">
+      <div>
+        <div class="kicker" data-t="kicker"></div>
+        <h1 data-t="hero_title"></h1>
+        <p class="lead" data-t="hero_text"></p>
+        <div class="btns">
+          <a class="btn solid" href="#events" data-t="cta_events"></a>
+          <a class="btn ghost" href="#join" data-t="cta_member"></a>
+        </div>
+      </div>
+      <figure class="ph" style="margin:0">
+        <svg class="pat" aria-hidden="true"><rect width="100%" height="100%" fill="url(#girih)"/></svg>
+        <figcaption data-t="ph_hero"></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <svg class="strip" aria-hidden="true"><rect width="100%" height="100%" fill="url(#girih)"/></svg>
+
+  <section class="block" id="posts">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-t="sec_news"></h2>
+        <a class="more" href="#posts" data-t="all_posts"></a>
+      </div>
+      <div class="posts" id="post-list"></div>
+    </div>
+  </section>
+
+  <section class="block events-bg" id="events">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-t="sec_events"></h2>
+        <a class="more" href="#events" data-t="all_events"></a>
+      </div>
+      <ol class="events" id="event-list"></ol>
+    </div>
+  </section>
+
+  <section class="band" id="join">
+    <svg class="pat" aria-hidden="true"><rect width="100%" height="100%" fill="url(#girih-band)"/></svg>
+    <div class="wrap">
+      <div>
+        <h2 data-t="member_title"></h2>
+        <p data-t="member_text"></p>
+      </div>
+      <div class="btns">
+        <a class="btn solid" href="#join" data-t="cta_member"></a>
+        <a class="btn ghost" href="#join" data-t="donate"></a>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <h4 data-t="brand"></h4>
+          <p data-t="foot_about"></p>
+        </div>
+        <div>
+          <h4 data-t="nav_contact"></h4>
+          <ul>
+            <li class="mono">info@afghanischer-kulturverein-trier.de</li>
+            <li data-t="address"></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-t="follow"></h4>
+          <ul>
+            <li><a href="#contact">Instagram</a></li>
+            <li><a href="#contact">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="legal">
+        <span class="mono">© 2026 afghanischer-kulturverein-trier.de</span>
+        <span><a href="#contact">Impressum</a> · <a href="#contact">Datenschutz</a> · <a href="#contact">Satzung</a></span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+const T = {
+  de: {
+    brand:"Afghanischer Kulturverein", city:"Trier",
+    nav_home:"Start", nav_news:"Beiträge", nav_events:"Termine", nav_about:"Über uns", nav_contact:"Kontakt", nav_member:"Mitglied werden",
+    kicker:"Afghanischer Kulturverein Trier",
+    hero_title:"Afghanische Kultur in Trier erleben",
+    hero_text:"Wir bringen Menschen zusammen bei Festen, Musik, Essen und Gesprächen. Platzhalter: Hier steht später ein Satz zum Vereinszweck aus eurer Satzung.",
+    cta_events:"Nächste Termine", cta_member:"Mitglied werden", donate:"Spenden",
+    ph_hero:"Foto-Platzhalter: Vereinsfest",
+    sec_news:"Neueste Beiträge", all_posts:"Alle Beiträge",
+    sec_events:"Nächste Termine", all_events:"Alle Termine", details:"Details",
+    member_title:"Werde Teil unseres Vereins",
+    member_text:"Platzhalter: Wer Mitglied werden kann, wie hoch der Beitrag ist und wie Spenden die Arbeit des Vereins unterstützen.",
+    foot_about:"Afghanische Kultur, Sprache und Gemeinschaft in Trier.",
+    address:"Adresse: Platzhalter, 54290 Trier", follow:"Folgt uns",
+    example:"Beispiel", nav_label:"Hauptnavigation"
+  },
+  en: {
+    brand:"Afghan Cultural Association", city:"Trier",
+    nav_home:"Home", nav_news:"Posts", nav_events:"Events", nav_about:"About us", nav_contact:"Contact", nav_member:"Join us",
+    kicker:"Afghanischer Kulturverein Trier",
+    hero_title:"Experience Afghan culture in Trier",
+    hero_text:"We bring people together through festivals, music, food and conversation. Placeholder: a sentence about the association's purpose from your statutes goes here.",
+    cta_events:"Upcoming events", cta_member:"Become a member", donate:"Donate",
+    ph_hero:"Photo placeholder: community event",
+    sec_news:"Latest posts", all_posts:"All posts",
+    sec_events:"Upcoming events", all_events:"All events", details:"Details",
+    member_title:"Become part of our community",
+    member_text:"Placeholder: who can join, the membership fee, and how donations support the association.",
+    foot_about:"Afghan culture, language and community in Trier.",
+    address:"Address: placeholder, 54290 Trier", follow:"Follow us",
+    example:"Example", nav_label:"Main navigation"
+  },
+  fa: {
+    brand:"انجمن فرهنگی افغان‌ها", city:"تریر",
+    nav_home:"خانه", nav_news:"نوشته‌ها", nav_events:"برنامه‌ها", nav_about:"درباره ما", nav_contact:"تماس", nav_member:"عضویت",
+    kicker:"انجمن فرهنگی افغان‌ها در تریر",
+    hero_title:"خوش آمدید",
+    hero_text:"متن نمونه: اینجا یک جمله کوتاه درباره انجمن می‌آید.",
+    cta_events:"برنامه‌های آینده", cta_member:"عضو شوید", donate:"کمک مالی",
+    ph_hero:"جای عکس",
+    sec_news:"تازه‌ترین نوشته‌ها", all_posts:"همه نوشته‌ها",
+    sec_events:"برنامه‌های آینده", all_events:"همه برنامه‌ها", details:"جزئیات",
+    member_title:"عضو انجمن شوید",
+    member_text:"متن نمونه درباره عضویت و کمک مالی.",
+    foot_about:"فرهنگ و زبان افغانستان در تریر.",
+    address:"آدرس: متن نمونه، 54290 تریر", follow:"ما را دنبال کنید",
+    example:"نمونه", nav_label:"فهرست اصلی"
+  },
+  ps: {
+    brand:"د افغانانو کلتوري ټولنه", city:"تریر",
+    nav_home:"کور", nav_news:"لیکنې", nav_events:"پروګرامونه", nav_about:"زموږ په اړه", nav_contact:"اړیکه", nav_member:"غړیتوب",
+    kicker:"په تریر کې د افغانانو کلتوري ټولنه",
+    hero_title:"ښه راغلاست",
+    hero_text:"د نمونې متن: دلته د ټولنې په اړه یوه لنډه جمله راځي.",
+    cta_events:"راتلونکي پروګرامونه", cta_member:"غړی شئ", donate:"مرسته",
+    ph_hero:"د انځور ځای",
+    sec_news:"وروستۍ لیکنې", all_posts:"ټولې لیکنې",
+    sec_events:"راتلونکي پروګرامونه", all_events:"ټول پروګرامونه", details:"جزئیات",
+    member_title:"د ټولنې غړی شئ",
+    member_text:"د غړیتوب او مرستې په اړه د نمونې متن.",
+    foot_about:"په تریر کې د افغانستان کلتور او ژبه.",
+    address:"پته: د نمونې متن، 54290 تریر", follow:"موږ تعقیب کړئ",
+    example:"نمونه", nav_label:"اصلي مینو"
+  }
+};
+
+// Example content. Solar Hijri dates use the Afghan month names (Hamal, Sawr, Jawza ...).
+const POSTS = [
+  { date:"2026-08-29", solar:"7 Sunbula 1405", ph:{de:"Foto: Sommerfest",en:"Photo: summer party",fa:"جای عکس",ps:"د انځور ځای"},
+    title:{de:"Bilder vom Sommerfest",en:"Photos from the summer party",fa:"عکس‌های جشن تابستانی",ps:"د دوبي جشن انځورونه"},
+    text:{de:"Platzhalter: Ein kurzer Rückblick und eine Fotogalerie vom Fest.",en:"Placeholder: a short recap and a photo gallery from the party.",fa:"متن نمونه برای این نوشته.",ps:"د دې لیکنې لپاره د نمونې متن."} },
+  { date:"2026-06-10", solar:"20 Jawza 1405", ph:{de:"Foto: Vorstand",en:"Photo: board",fa:"جای عکس",ps:"د انځور ځای"},
+    title:{de:"Unser Verein stellt sich vor",en:"Meet our association",fa:"انجمن ما را بشناسید",ps:"زموږ ټولنه وپېژنئ"},
+    text:{de:"Platzhalter: Wer wir sind, was wir machen und wie ihr mitmachen könnt.",en:"Placeholder: who we are, what we do and how you can take part.",fa:"متن نمونه برای این نوشته.",ps:"د دې لیکنې لپاره د نمونې متن."} },
+  { date:"2026-03-21", solar:"1 Hamal 1405", ph:{de:"Foto: Nowruz",en:"Photo: Nowruz",fa:"جای عکس",ps:"د انځور ځای"},
+    title:{de:"Rückblick: Nowruz 1405",en:"Looking back: Nowruz 1405",fa:"نگاهی به جشن نوروز ۱۴۰۵",ps:"د ۱۴۰۵ نوروز جشن ته کتنه"},
+    text:{de:"Platzhalter: Wie wir das neue Jahr gemeinsam gefeiert haben.",en:"Placeholder: how we celebrated the new year together.",fa:"متن نمونه برای این نوشته.",ps:"د دې لیکنې لپاره د نمونې متن."} }
+];
+const EVENTS = [
+  { date:"2026-10-17", time:"18:00", solar:"25 Mizan 1405",
+    title:{de:"Kulturabend: Musik und Poesie",en:"Culture night: music and poetry",fa:"شب فرهنگی: موسیقی و شعر",ps:"فرهنګي شپه: موسیقي او شعر"} },
+  { date:"2026-11-14", time:"17:00", solar:"23 Aqrab 1405",
+    title:{de:"Gemeinsam kochen: Qabuli Palau",en:"Cooking together: Qabuli Palau",fa:"آشپزی با هم: قابلی پلو",ps:"ګډ پخلی: قابلي پلو"} },
+  { date:"2026-12-21", time:"19:00", solar:"30 Qaws 1405",
+    title:{de:"Shab-e Yalda: die längste Nacht",en:"Shab-e Yalda: the longest night",fa:"شب یلدا",ps:"د یلدا شپه"} }
+];
+const WHERE = { de:"Ort: Platzhalter, Trier", en:"Venue: placeholder, Trier", fa:"محل: تریر", ps:"ځای: تریر" };
+const LOC = { de:"de-DE", en:"en-GB", fa:"fa-AF", ps:"ps-AF" };
+
+function fmt(iso, lang, opts) {
+  const d = new Date(iso + "T12:00:00");
+  try { return new Intl.DateTimeFormat(LOC[lang] + "-u-ca-gregory", opts).format(d); }
+  catch (e) { return new Intl.DateTimeFormat("de-DE", opts).format(d); }
+}
+function solar(item, lang) {
+  if (lang === "de" || lang === "en") return item.solar;
+  try { return new Intl.DateTimeFormat(LOC[lang] + "-u-ca-persian", { day:"numeric", month:"long", year:"numeric" }).format(new Date(item.date + "T12:00:00")); }
+  catch (e) { return item.solar; }
+}
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c])); }
+
+function render(lang) {
+  const t = T[lang], rtl = lang === "fa" || lang === "ps";
+  const site = document.getElementById("site");
+  site.lang = lang; site.dir = rtl ? "rtl" : "ltr";
+  document.querySelectorAll("[data-t]").forEach(el => { if (t[el.dataset.t] != null) el.textContent = t[el.dataset.t]; });
+  document.querySelector("nav").setAttribute("aria-label", t.nav_label);
+  document.getElementById("rtl-note").hidden = !rtl;
+
+  document.getElementById("post-list").innerHTML = POSTS.map(p => `
+    <article class="post">
+      <figure class="ph" style="margin:0">
+        <svg class="pat" aria-hidden="true"><rect width="100%" height="100%" fill="url(#girih)"/></svg>
+        <figcaption>${esc(p.ph[lang])}</figcaption>
+      </figure>
+      <div class="meta">
+        <span class="badge">${esc(t.example)}</span>
+        <time datetime="${p.date}">${esc(fmt(p.date, lang, { day:"numeric", month:"long", year:"numeric" }))}</time>
+        <span>· ${esc(solar(p, lang))}</span>
+      </div>
+      <h3><a href="#posts">${esc(p.title[lang])}</a></h3>
+      <p>${esc(p.text[lang])}</p>
+    </article>`).join("");
+
+  document.getElementById("event-list").innerHTML = EVENTS.map(e => `
+    <li class="event">
+      <time class="date" datetime="${e.date}T${e.time}">
+        <span class="d">${esc(fmt(e.date, lang, { day:"numeric" }))}</span>
+        <span class="mo">${esc(fmt(e.date, lang, { month:"short" }))}</span>
+      </time>
+      <div>
+        <h3>${esc(e.title[lang])}</h3>
+        <div class="solar">${esc(solar(e, lang))} · ${esc(fmt(e.date, lang, { weekday:"long" }))}, ${e.time}</div>
+        <div class="where">${esc(WHERE[lang])} · <span class="badge">${esc(t.example)}</span></div>
+      </div>
+      <a class="btn ghost" href="#events">${esc(t.details)}</a>
+    </li>`).join("");
+
+  document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+}
+
+function setPalette(p) {
+  document.documentElement.dataset.palette = p;
+  document.querySelectorAll("[data-pal]").forEach(b => b.setAttribute("aria-pressed", b.dataset.pal === p));
+}
+
+function load(k, d) { try { return localStorage.getItem(k) || d; } catch (e) { return d; } }
+function save(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+document.querySelectorAll("[data-pal]").forEach(b => b.addEventListener("click", () => { setPalette(b.dataset.pal); save("akv-pal", b.dataset.pal); }));
+document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => { render(b.dataset.lang); save("akv-lang", b.dataset.lang); }));
+
+const startPal = load("akv-pal", "lapis"), startLang = load("akv-lang", "de");
+setPalette(T && ["lapis","firuza","jade"].includes(startPal) ? startPal : "lapis");
+render(T[startLang] ? startLang : "de");
+</script>
