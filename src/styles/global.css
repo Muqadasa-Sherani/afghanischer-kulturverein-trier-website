@@ -1,0 +1,100 @@
+/* ===== Design tokens ===== */
+:root {
+  /* Main colour: lapis lazuli navy */
+  --lapis-900: #14224f; /* header, footer */
+  --lapis-700: #1f3a8a; /* links, buttons */
+  --lapis-500: #2848e0; /* the blue dot in the logo */
+
+  /* The four stone accents, exactly as in the logo dots.
+     Use these for shapes and decoration, or as text on navy. */
+  --firuza: #30e0e8;
+  --emerald: #58e820;
+  --gold: #f8d858;
+  --ruby: #e81818;
+
+  /* Darker versions that are readable as text on a light background */
+  --firuza-text: #0a7780;
+  --emerald-text: #2b7519;
+  --gold-text: #8a6a00;
+  --ruby-text: #b8141a;
+
+  /* Neutrals */
+  --bg: #f7f8fc;
+  --surface: #ffffff;
+  --text: #161b33;
+  --muted: #4f5670;
+  --line: #dde1ec;
+
+  /* Type */
+  --font-latin: 'Nunito Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-arabic: 'Noto Sans Arabic Variable', 'Geeza Pro', Tahoma, sans-serif;
+
+  --radius: 8px;
+  --container: 1120px;
+}
+
+/* ===== Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-latin);
+}
+
+html[dir='rtl'] {
+  font-family: var(--font-arabic);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+a {
+  color: var(--lapis-700);
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ===== Helpers ===== */
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.skip-link {
+  position: absolute;
+  inset-inline-start: 1rem;
+  top: -3rem;
+  background: var(--gold);
+  color: var(--lapis-900);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}

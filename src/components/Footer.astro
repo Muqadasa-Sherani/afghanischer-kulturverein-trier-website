@@ -1,0 +1,85 @@
+---
+import { socialLinks } from '../data/social';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+   <div class="container footer-grid">
+      <div>
+      <h2> Afghanischer Kulturverein Trier e.V. </h2>
+      <p> Zwei Kulturen, eine Heimat. </p>
+   </div>
+
+   <div>
+      <h2>Kontakt</h2>
+      <p>info@afghanischer-kulturverein-trier.de</p>
+    </div>
+
+  <div>
+      <h2>Folgt uns</h2>
+      <ul>
+        {
+          socialLinks.map((link) => (
+            <li>
+              <a href={link.href} target="_blank" rel="noopener noreferrer">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="container legal">
+    <span>© {year} Afghanischer Kulturverein Trier e.V.</span>
+    <span><a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a></span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--lapis-900);
+    color: #fff;
+    margin-top: 4rem;
+    padding-block: 2.5rem 1.5rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+    color: var(--gold);
+    margin: 0 0 0.5rem;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    color: var(--firuza);
+  }
+
+  .legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgb(255 255 255 / 0.12);
+    font-size: 0.875rem;
+  }
+</style>

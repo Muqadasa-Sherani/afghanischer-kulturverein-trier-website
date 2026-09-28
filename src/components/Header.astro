@@ -1,0 +1,161 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-white.png';
+
+const navLinks = [
+  { href: '/', label: 'Start' },
+  { href: '/aktuelles', label: 'Aktuelles' },
+  { href: '/ueber-uns', label: 'Über uns' },
+  { href: '/team', label: 'Team' },
+  { href: '/archiv', label: 'Archiv' },
+  { href: '/kontakt', label: 'Kontakt' },
+];
+
+import { socialLinks } from '../data/social';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <ul class="social">
+        {
+          socialLinks.map((link) => (
+            <li>
+              <a href={link.href} target="_blank" rel="noopener noreferrer">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="container header-inner">
+    <a href="/" class="brand">
+      <Image src={logo} alt="" width={88} />
+      <span class="brand-name">
+        Afghanischer Kulturverein
+        <small>Trier e.V.</small>
+      </span>
+    </a>
+
+    <nav aria-label="Hauptnavigation">
+      <ul class="nav">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a href={link.href} aria-current={currentPath === link.href ? 'page' : undefined}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a href="/mitglied-werden" class="join">Mitglied werden</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: var(--lapis-900);
+    color: #fff;
+  }
+
+  .topbar {
+    border-bottom: 1px solid rgb(255 255 255 / 0.12);
+    font-size: 0.875rem;
+  }
+
+  .topbar-inner {
+    display: flex;
+    justify-content: flex-end;
+    padding-block: 0.4rem;
+  }
+
+  .social {
+    display: flex;
+    gap: 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .social a {
+    color: var(--firuza);
+    text-decoration: none;
+  }
+
+  .social a:hover {
+    text-decoration: underline;
+  }
+
+  .header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
+    padding-block: 0.75rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #fff;
+    text-decoration: none;
+    margin-inline-end: auto;
+  }
+
+  .brand-name {
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .brand-name small {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gold);
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+  }
+
+  .nav a {
+    color: #fff;
+    text-decoration: none;
+    padding-block: 0.25rem;
+    border-bottom: 3px solid transparent;
+  }
+
+  .nav a:hover,
+  .nav a[aria-current='page'] {
+    border-bottom-color: var(--firuza);
+  }
+
+  .join {
+    background: var(--gold);
+    color: var(--lapis-900);
+    font-weight: 800;
+    text-decoration: none;
+    padding: 0.6rem 1.1rem;
+    border-radius: var(--radius);
+  }
+
+  .join:hover {
+    background: #fff;
+  }
+</style>
